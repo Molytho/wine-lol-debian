@@ -1,0 +1,8 @@
+Package: wine-lol
+Version: 9.23-1
+Section: base
+Priority: optional
+Architecture: i386
+Depends: wine-lol-glibc, wine-staging
+Maintainer: Robin Ebert
+Description: Wine package, being able to execute League of Legends

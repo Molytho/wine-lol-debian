@@ -1,0 +1,11 @@
+--- glibc-2.27.orig/nptl/descr.h
++++ glibc-2.27/nptl/descr.h
+@@ -155,7 +155,7 @@ struct pthread
+        is private and subject to change without affecting the official ABI.
+        We just have it here in case it might be convenient for some
+        implementation-specific instrumentation hack or suchlike.  */
+-    void *__padding[24];
++    void *__padding[28];
+   };
+ 
+   /* This descriptor's link on the `stack_used' or `__stack_user' list.  */

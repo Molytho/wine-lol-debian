@@ -1,0 +1,7 @@
+Package: wine-lol-glibc
+Version: 1.0-1
+Section: base
+Priority: optional
+Architecture: i386
+Maintainer: Robin Ebert
+Description: Glibc package, being able to execute League of Legends

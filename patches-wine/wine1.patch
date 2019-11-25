@@ -1,0 +1,29 @@
+From da80c5fd1430b20492a497868a666dc9d8ea4bea Mon Sep 17 00:00:00 2001
+From: David Torok <dt@zeroitlab.com>
+Date: Tue, 19 Nov 2019 23:01:46 +0100
+Subject: [PATCH] ntdll: NtQueryInformationThread: respond to
+ ThreadHideFromDebugger
+
+---
+ dlls/ntdll/thread.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/dlls/ntdll/thread.c b/dlls/ntdll/thread.c
+index c5b2008e44..6b146507b3 100644
+--- a/dlls/ntdll/thread.c
++++ b/dlls/ntdll/thread.c
+@@ -1430,6 +1430,11 @@ NTSTATUS WINAPI NtQueryInformationThread( HANDLE handle, THREADINFOCLASS class,
+         *(BOOL*)data = FALSE;
+         if (ret_len) *ret_len = sizeof(BOOL);
+         return STATUS_SUCCESS;
++    case ThreadHideFromDebugger:
++        if (length != sizeof(char)) return STATUS_INFO_LENGTH_MISMATCH;
++        *(char*)data = "\x01";
++        if (ret_len) *ret_len = sizeof(char);
++        return STATUS_SUCCESS;
+     case ThreadPriority:
+     case ThreadBasePriority:
+     case ThreadImpersonationToken:
+-- 
+2.24.0
+
