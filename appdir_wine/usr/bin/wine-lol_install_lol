@@ -2,12 +2,22 @@ export LD_LIBRARY_PATH=/opt/wine-lol/lib32
 
 /opt/wine-lol/bin/wineboot --init
 
-cd "$WINEPREFIX"
-wget https://riotgamespatcher-a.akamaihd.net/releases/live/installer/deploy/League%20of%20Legends%20installer%20NA.exe
+mkdir /tmp/wine-lol_download
+chdir /tmp/wine-lol_download
 
-/opt/wine-lol/bin/wine /opt/wine-lol/helperpkg/DXSETUP.exe /silent
-/opt/wine-lol/helperpkg/d9vk-0.22/setup_dxvk.sh install 
+cd "$WINEPREFIX"
+wget -O installer.exe https://riotgamespatcher-a.akamaihd.net/releases/live/installer/deploy/League%20of%20Legends%20installer%20NA.exe
+
+wget -O directx.tar.gz https://lutris.net/files/tools/directx-2010.tar.gz
+tar -xf directx.tar.gz
+/opt/wine-lol/bin/wine DXSETUP.exe /silent
+
+wget -O d9vk.tar.gz https://github.com/Joshua-Ashton/d9vk/releases/download/0.22/d9vk-0.22.tar.gz
+tar -xf d9vk.tar.gz
+d9vk-0.22/setup_dxvk.sh install 
 
 winetricks corefonts
 
-/opt/wine-lol/bin/wine League\ of\ Legends\ installer\ NA.exe
+/opt/wine-lol/bin/wine installer.exe
+
+rm -r /tmp/wine-lol_download
