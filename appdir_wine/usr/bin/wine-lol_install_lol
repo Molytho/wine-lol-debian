@@ -12,9 +12,9 @@ wget -O directx.tar.gz https://lutris.net/files/tools/directx-2010.tar.gz
 tar -xf directx.tar.gz
 /opt/wine-lol/bin/wine DXSETUP.exe /silent
 
-wget -O d9vk.tar.gz https://github.com/Joshua-Ashton/d9vk/releases/download/0.22/d9vk-0.22.tar.gz
+wget -O d9vk.tar.gz https://github.com/Joshua-Ashton/d9vk/releases/download/0.22/d9vk-0.30.tar.gz
 tar -xf d9vk.tar.gz
-d9vk-0.22/setup_dxvk.sh install 
+d9vk-0.30/setup_dxvk.sh install 
 
 winetricks corefonts
 
