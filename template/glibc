@@ -1,5 +1,5 @@
-Package: wine-lol-glibc
-Version: 1.0-1
+Package: glibc-name
+Version: glibc-version
 Section: base
 Priority: optional
 Architecture: i386

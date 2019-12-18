@@ -1,4 +1,5 @@
 #!/bin/bash
+version=9.24-1
 
 PARALLEL=4
 
@@ -184,16 +185,17 @@ pushd ..
 chmod a+x appdir_glibc/DEBIAN/postinst
 find appdir_glibc/usr/bin/ -type f -exec chmod a+x {} \;
 
+./print-name-glibc wine-lol-glibc-dev $version
 dpkg-deb --build appdir_glibc
 dpkg -i appdir_glibc.deb
-mv appdir_glibc.deb wine-lol-glibc.deb
+mv appdir_glibc.deb wine-lol-glibc-dev_$version.deb
 
 popd
 
 pushd wine
 
 config_wine
-export LD_LIBRARY_PATH=$/opt/wine-lol/lib32
+export LD_LIBRARY_PATH=/opt/wine-lol/lib32
 make -j$PARALLEL
 make prefix="$PWD/../../appdir_wine/opt/wine-lol" \
     libdir="$PWD/../../appdir_wine/opt/wine-lol/lib32" \
@@ -205,8 +207,15 @@ popd
 
 find appdir_wine/usr/bin/ -type f -exec chmod a+x {} \;
 
+find appdir_wine/ -type f -exec file {} \; | grep "not stripped" | sed 's/:.*//' | while read i; do strip %i; done
+find appdir_glibc/ -type f -exec file {} \; | grep "not stripped" | sed 's/:.*//' | while read i; do strip %i; done
+
+./print-name-glibc wine-lol-glibc $version
+dpkg-deb --build appdir_glibc
+mv appdir_glibc.deb wine-lol-glibc_$version.deb
+./print-name-wine wine-lol $version
 dpkg-deb --build appdir_wine
-mv appdir_wine.deb wine-lol.deb
+mv appdir_wine.deb wine-lol_$version.deb
 
 exit 0
 

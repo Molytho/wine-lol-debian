@@ -1,5 +1,5 @@
-Package: wine-lol
-Version: 9.23-1
+Package: wine-name
+Version: wine-version
 Section: base
 Priority: optional
 Architecture: i386
