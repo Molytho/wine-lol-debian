@@ -175,8 +175,8 @@ mkdir glibc
 pushd glibc
 
 config_glibc
-make -j$PARALLEL
-make install_root="$PWD/../../appdir_glibc" install -j$PARALLEL
+make -j$PARALLEL || die "glibc failed"
+make install_root="$PWD/../../appdir_glibc" install -j$PARALLEL || die "glibc failed"
 
 popd
 
@@ -187,7 +187,7 @@ find appdir_glibc/usr/bin/ -type f -exec chmod a+x {} \;
 
 ./print-name-glibc wine-lol-glibc-dev $version
 dpkg-deb --build appdir_glibc
-dpkg -i appdir_glibc.deb
+dpkg -i appdir_glibc.deb|| die "could not install package"
 mv appdir_glibc.deb wine-lol-glibc-dev_$version.deb
 
 popd
@@ -196,10 +196,10 @@ pushd wine
 
 config_wine
 export LD_LIBRARY_PATH=/opt/wine-lol/lib32
-make -j$PARALLEL
+make -j$PARALLEL || die "wine failed"
 make prefix="$PWD/../../appdir_wine/opt/wine-lol" \
     libdir="$PWD/../../appdir_wine/opt/wine-lol/lib32" \
-    dlldir="$PWD/../../appdir_wine/opt/wine-lol/lib32/wine" install -j$PARALLEL
+    dlldir="$PWD/../../appdir_wine/opt/wine-lol/lib32/wine" install -j$PARALLEL || die "wine failed"
 
 popd
 
