@@ -207,6 +207,8 @@ popd
 
 find appdir_wine/usr/bin/ -type f -exec chmod a+x {} \;
 
+dpkg -r wine-lol-glibc-dev
+
 find appdir_wine/ -type f -exec file {} \; | grep "not stripped" | sed 's/:.*//' | while read i; do strip %i; done
 find appdir_glibc/ -type f -exec file {} \; | grep "not stripped" | sed 's/:.*//' | while read i; do strip %i; done
 
