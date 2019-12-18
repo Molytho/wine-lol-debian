@@ -182,9 +182,6 @@ popd
 
 pushd ..
 
-chmod a+x appdir_glibc/DEBIAN/postinst
-find appdir_glibc/usr/bin/ -type f -exec chmod a+x {} \;
-
 ./print-name-glibc wine-lol-glibc-dev $version
 dpkg-deb --build appdir_glibc
 dpkg -i appdir_glibc.deb|| die "could not install package"
@@ -204,8 +201,6 @@ make prefix="$PWD/../../appdir_wine/opt/wine-lol" \
 popd
 
 popd
-
-find appdir_wine/usr/bin/ -type f -exec chmod a+x {} \;
 
 dpkg -r wine-lol-glibc-dev
 
