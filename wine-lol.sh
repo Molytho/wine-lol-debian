@@ -204,8 +204,8 @@ popd
 
 dpkg -r wine-lol-glibc-dev
 
-find appdir_wine/ -type f -exec file {} \; | grep "not stripped" | sed 's/:.*//' | while read i; do strip %i; done
-find appdir_glibc/ -type f -exec file {} \; | grep "not stripped" | sed 's/:.*//' | while read i; do strip %i; done
+find appdir_wine/ -type f -exec file {} \; | grep "not stripped" | sed 's/:.*//' | while read i; do strip $i; done
+find appdir_glibc/ -type f -exec file {} \; | grep "not stripped" | sed 's/:.*//' | while read i; do strip $i; done
 
 ./print-name-glibc.sh wine-lol-glibc $version
 dpkg-deb --build appdir_glibc
