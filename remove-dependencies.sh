@@ -1,2 +1,2 @@
 #!/bin/bash
-apt remove `cat dependencies`
+apt remove `cat dependencies` -y
