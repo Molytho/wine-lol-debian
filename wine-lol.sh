@@ -182,10 +182,7 @@ popd
 
 pushd ..
 
-chmod a+x appdir_glibc/DEBIAN/postinst
-find appdir_glibc/usr/bin/ -type f -exec chmod a+x {} \;
-
-./print-name-glibc wine-lol-glibc-dev $version
+./print-name-glibc.sh wine-lol-glibc-dev $version
 dpkg-deb --build appdir_glibc
 dpkg -i appdir_glibc.deb|| die "could not install package"
 mv appdir_glibc.deb wine-lol-glibc-dev_$version.deb
@@ -205,17 +202,15 @@ popd
 
 popd
 
-find appdir_wine/usr/bin/ -type f -exec chmod a+x {} \;
-
 dpkg -r wine-lol-glibc-dev
 
-find appdir_wine/ -type f -exec file {} \; | grep "not stripped" | sed 's/:.*//' | while read i; do strip %i; done
-find appdir_glibc/ -type f -exec file {} \; | grep "not stripped" | sed 's/:.*//' | while read i; do strip %i; done
+find appdir_wine/ -type f -exec file {} \; | grep "not stripped" | sed 's/:.*//' | while read i; do strip $i; done
+find appdir_glibc/ -type f -exec file {} \; | grep "not stripped" | sed 's/:.*//' | while read i; do strip $i; done
 
-./print-name-glibc wine-lol-glibc $version
+./print-name-glibc.sh wine-lol-glibc $version
 dpkg-deb --build appdir_glibc
 mv appdir_glibc.deb wine-lol-glibc_$version.deb
-./print-name-wine wine-lol $version
+./print-name-wine.sh wine-lol $version
 dpkg-deb --build appdir_wine
 mv appdir_wine.deb wine-lol_$version.deb
 
