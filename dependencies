@@ -1,12 +1,3 @@
-build-essential
-gcc-multilib
-wget
-autoconf
-git
-tar
-md5sum
-automake
-
 libx11-dev:i386
 libfreetype6-dev:i386
 libxml2-dev:i386
@@ -46,3 +37,4 @@ libxrandr-dev:i386
 libxi-dev:i386
 libxcursor-dev:i386
 libvulkan-dev:i386
+libvkd3d-dev:i386
