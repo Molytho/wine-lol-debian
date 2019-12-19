@@ -151,7 +151,7 @@ ln -s glibc-2.30 glibc-src
 ln -s wine-4.20 wine-src
 
 pushd wine-staging-4.20/patches
-./patchinstall.sh DESTDIR=../../wine-4.20 --all
+./patchinstall.sh DESTDIR=../../wine-4.20 --all || die "wine-staging patches failed"
 popd
 
 pushd wine-4.20
