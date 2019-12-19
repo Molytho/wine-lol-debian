@@ -1,4 +1,6 @@
 # wine-lol-debian
 Buildscript being able to compile the custom wine version needed for "League of Legends"
 
-!!! YOU NEED TO INSTALL THE WINE MAKEDEPENDENCIES MANUALLY !!!
+You need to run install-dependencies first.
+
+I recomment building in a chroot environment
