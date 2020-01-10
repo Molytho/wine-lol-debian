@@ -3,7 +3,6 @@ export LD_LIBRARY_PATH=/opt/wine-lol/lib32
 /opt/wine-lol/bin/wineboot --init
 
 mkdir /tmp/wine-lol_download
-chdir /tmp/wine-lol_download
 
 cd "$WINEPREFIX"
 wget -O installer.exe https://riotgamespatcher-a.akamaihd.net/releases/live/installer/deploy/League%20of%20Legends%20installer%20NA.exe
