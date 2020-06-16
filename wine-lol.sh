@@ -1,15 +1,15 @@
 #!/bin/bash
-version=9.24-1
+version=10.12-1
 
 PARALLEL=4
 
 glibc_src=https://ftp.gnu.org/gnu/glibc/glibc-2.30.tar.xz
-wine_src=https://dl.winehq.org/wine/source/4.x/wine-4.20.tar.xz
-wine_staging_src=https://github.com/wine-staging/wine-staging/archive/v4.20.tar.gz
+wine_src=https://dl.winehq.org/wine/source/5.x/wine-5.9.tar.xz
+wine_staging_src=https://github.com/wine-staging/wine-staging/archive/v5.9.tar.gz
 
 glibc_md5sum=2b1dbdf27b28620752956c061d62f60c
-wine_md5sum=8cc2c2df281ef89217573ca228bc7ba7
-wine_staging_md5sum=792ad8b24dfa26200b5ab5be7168fbbc
+wine_md5sum=0a6d8a33de07a2dd25d89bd4f18626c3
+wine_staging_md5sum=b94848cbbacb010075fa4db706872aeb
 
 function die
 {
@@ -128,14 +128,14 @@ fi
 
 rm sums
 
-if [ -d wine-4.20 ]
-	then rm -r wine-4.20
+if [ -d wine-5.9 ]
+	then rm -r wine-5.9
 fi
 if [ -d glibc-2.30 ]
 	then rm -r glibc-2.30
 fi
-if [ -d wine-staging-4.20 ]
-	then rm -r wine-staging-4.20
+if [ -d wine-staging-5.9 ]
+	then rm -r wine-staging-5.9
 fi
 if [ -f wine-src ]
     then rm wine-src
@@ -148,17 +148,17 @@ tar -xf src_glibc.tar.xz
 tar -xf src_wine.tar.xz
 tar -xf src_wine_staging.tar.gz
 ln -s glibc-2.30 glibc-src
-ln -s wine-4.20 wine-src
+ln -s wine-5.9 wine-src
 
-pushd wine-staging-4.20/patches
-./patchinstall.sh DESTDIR=../../wine-4.20 --all || die "wine-staging patches failed"
+pushd wine-staging-5.9/patches
+./patchinstall.sh DESTDIR=../../wine-5.9 --all || die "wine-staging patches failed"
 popd
 
-pushd wine-4.20
+pushd wine-src
 find ../../patches-wine -name "*.patch" -exec patch -p1 -i {} \;
 popd
 
-pushd glibc-2.30
+pushd glibc-src
 find ../../patches-glibc -name "*.patch" -exec patch -p1 -i {} \;
 popd
 popd
